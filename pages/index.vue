@@ -16,15 +16,15 @@ const navigation = [
 const stats = [
   {
     label: 'TTRPGs in Database',
-    value: '+1,200',
+    value: '+100',
   },
   {
     label: 'Registered Users',
-    value: '+85k',
+    value: '+85',
   },
   {
     label: 'Monthly Active Users',
-    value: '+100',
+    value: '+67',
   },
 ]
 const values = [
