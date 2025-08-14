@@ -379,10 +379,13 @@ const { fetchGameById, deleteGame } = useGames()
 const toast = useToast()
 
 // Fetch game data
-const { data: game, pending, error } = await useAsyncData(
+const { data: gameResponse, pending, error } = await useAsyncData(
   `game-${gameId.value}`,
-  () => fetchGameById(gameId.value).then(res => res.data as GameWithRelations | null)
+  () => fetchGameById(gameId.value)
 )
+
+// Extract game from response
+const game = computed(() => gameResponse.value?.data as GameWithRelations | null)
 
 // Tabs configuration
 const tabs = computed(() => {

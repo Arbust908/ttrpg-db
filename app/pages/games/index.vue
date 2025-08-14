@@ -56,118 +56,12 @@
 
     <!-- Games Table -->
     <div v-else-if="games && games.length > 0">
+      <!-- Simple table without custom templates to test -->
       <UTable
-        :columns="columns"
-        :rows="games"
+        :data="games"
+        :columns="simpleColumns"
         class="w-full"
-      >
-        <!-- Thumbnail Column -->
-        <template #thumbnail-data="{ row }">
-          <div class="w-16 h-16">
-            <img
-              v-if="row.thumbnail"
-              :src="row.thumbnail"
-              :alt="row.title"
-              class="w-full h-full object-cover rounded"
-            >
-            <div
-              v-else
-              class="w-full h-full bg-gray-200 dark:bg-gray-700 rounded flex items-center justify-center"
-            >
-              <UIcon
-                name="i-lucide-image-off"
-                class="w-6 h-6 text-gray-400"
-              />
-            </div>
-          </div>
-        </template>
-
-        <!-- Title Column -->
-        <template #title-data="{ row }">
-          <div>
-            <NuxtLink
-              :to="`/games/${row.id}`"
-              class="font-medium text-primary hover:underline"
-            >
-              {{ row.title }}
-            </NuxtLink>
-            <div
-              v-if="row.subtitle"
-              class="text-sm text-gray-500"
-            >
-              {{ row.subtitle }}
-            </div>
-          </div>
-        </template>
-
-        <!-- Year Column -->
-        <template #year-data="{ row }">
-          <UBadge
-            v-if="row.year"
-            color="neutral"
-            variant="subtle"
-          >
-            {{ row.year }}
-          </UBadge>
-          <span
-            v-else
-            class="text-gray-400"
-          >—</span>
-        </template>
-
-        <!-- Rating Column -->
-        <template #rating-data="{ row }">
-          <div class="flex items-center gap-2">
-            <div class="flex items-center">
-              <UIcon
-                name="i-lucide-star"
-                class="w-4 h-4 text-yellow-500"
-              />
-              <span class="ml-1">{{ row.rating_average?.toFixed(1) || '—' }}</span>
-            </div>
-            <span
-              v-if="row.rating_voters"
-              class="text-xs text-gray-500"
-            >
-              ({{ row.rating_voters }})
-            </span>
-          </div>
-        </template>
-
-        <!-- Rank Column -->
-        <template #rank-data="{ row }">
-          <div v-if="row.rank_position">
-            <UBadge
-              color="primary"
-              variant="subtle"
-            >
-              #{{ row.rank_position }}
-            </UBadge>
-            <div
-              v-if="row.rank_category"
-              class="text-xs text-gray-500 mt-1"
-            >
-              {{ row.rank_category }}
-            </div>
-          </div>
-          <span
-            v-else
-            class="text-gray-400"
-          >—</span>
-        </template>
-
-        <!-- Actions Column -->
-        <template #actions-data="{ row }">
-          <UDropdownMenu :items="getActionItems(row)">
-            <UButton
-              color="neutral"
-              variant="ghost"
-              icon="i-lucide-more-vertical"
-              size="xs"
-            />
-          </UDropdownMenu>
-        </template>
-      </UTable>
+      />
 
       <!-- Pagination -->
       <div class="mt-6 flex justify-center">
@@ -205,7 +99,6 @@
 
 <script setup lang="ts">
 import { debounce } from 'lodash-es'
-import type { FullGameData } from '#shared/database'
 
 // State
 const search = ref('')
@@ -226,26 +119,27 @@ const sortOptions = [
   { label: 'Recently Added', value: 'created_at' }
 ]
 
-// Table columns
-const columns = [
-  { key: 'thumbnail', label: '' },
-  { key: 'title', label: 'Title', sortable: true },
-  { key: 'year', label: 'Year', sortable: true },
-  { key: 'rating', label: 'Rating', sortable: true },
-  { key: 'rank', label: 'Rank', sortable: true },
-  { key: 'actions', label: '' }
+// Table columns - using accessorKey as per Nuxt UI documentation
+const simpleColumns = [
+  { accessorKey: 'title', header: 'Title' },
+  { accessorKey: 'year', header: 'Year' },
+  { accessorKey: 'rating_average', header: 'Rating' },
+  { accessorKey: 'rank_position', header: 'Rank' }
 ]
 
 // Fetch games
 const { data, pending, error, refresh } = await useAsyncData(
   'games-list',
-  () => fetchGames({
-    page: currentPage.value,
-    limit: pageSize,
-    search: search.value,
-    sortBy: sortBy.value,
-    sortOrder: sortOrder.value
-  }),
+  async () => {
+    const response = await fetchGames({
+      page: currentPage.value,
+      limit: pageSize,
+      search: search.value,
+      sortBy: sortBy.value,
+      sortOrder: sortOrder.value
+    })
+    return response
+  },
   {
     watch: [currentPage, sortBy, sortOrder]
   }
@@ -264,27 +158,4 @@ const debouncedSearch = debounce(() => {
   currentPage.value = 1
   refresh()
 }, 300)
-
-const getActionItems = (game: FullGameData) => [
-  [{
-    label: 'View Details',
-    icon: 'i-lucide-eye',
-    click: () => navigateTo(`/games/${game.id}`)
-  }],
-  [{
-    label: 'Edit',
-    icon: 'i-lucide-edit',
-    click: () => navigateTo(`/games/${game.id}/edit`)
-  }],
-  [{
-    label: 'Duplicate',
-    icon: 'i-lucide-copy',
-    click: () => console.log('Duplicate', game.id)
-  }],
-  [{
-    label: 'Delete',
-    icon: 'i-lucide-trash',
-    click: () => console.log('Delete', game.id)
-  }]
-]
 </script>
