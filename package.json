@@ -17,7 +17,9 @@
     "@nuxt/ui-pro": "^3.2.0",
     "@nuxtjs/supabase": "1.6.0",
     "@types/lodash-es": "^4.17.12",
+    "@types/nodemailer": "^6.4.17",
     "lodash-es": "^4.17.21",
+    "nodemailer": "^7.0.5",
     "nuxt": "^4.0.0"
   },
   "devDependencies": {

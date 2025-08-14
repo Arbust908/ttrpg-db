@@ -14,30 +14,73 @@
         </NuxtLink>
       </template>
 
-      <template #center>
-        <UHeaderLinks
-          :links="[
-            { label: 'Home', to: '/' },
-            { label: 'Dashboard', to: '/dashboard' },
-            { label: 'Games', to: '/games' },
-            {
-              label: 'Manage',
-              children: [
-                { label: 'Mechanics', to: '/mechanics' },
-                { label: 'Systems', to: '/systems' },
-                { label: 'Families', to: '/families' },
-                { label: 'Honors', to: '/honors' }
-              ]
-            }
-          ]"
-        />
+      <template>
+        <div class="flex items-center gap-4">
+          <ULink
+            to="/"
+            active-class="text-primary"
+            inactive-class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+          >
+            Home
+          </ULink>
+          <ULink
+            to="/dashboard"
+            active-class="text-primary"
+            inactive-class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+          >
+            Dashboard
+          </ULink>
+          <ULink
+            to="/games"
+            active-class="text-primary"
+            inactive-class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+          >
+            Games
+          </ULink>
+          <UDropdownMenu>
+            <UButton
+              color="neutral"
+              variant="ghost"
+              trailing-icon="i-lucide-chevron-down"
+              class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+            >
+              Manage
+            </UButton>
+            <template #content>
+              <ULink
+                to="/mechanics"
+                class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800"
+              >
+                Mechanics
+              </ULink>
+              <ULink
+                to="/systems"
+                class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800"
+              >
+                Systems
+              </ULink>
+              <ULink
+                to="/families"
+                class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800"
+              >
+                Families
+              </ULink>
+              <ULink
+                to="/honors"
+                class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800"
+              >
+                Honors
+              </ULink>
+            </template>
+          </UDropdownMenu>
+        </div>
       </template>
 
       <template #right>
         <UColorModeButton />
         <UButton
           icon="i-lucide-plus"
-          label="Add Game"
+          label="Browse Game"
           color="primary"
           to="/games/new"
           class="hidden sm:flex"
@@ -81,10 +124,6 @@
       </template>
     </UFooter>
 
-    <UNotifications />
+    <UToast />
   </div>
 </template>
-
-<script setup lang="ts">
-// Layout setup
-</script>

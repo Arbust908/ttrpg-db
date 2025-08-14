@@ -3,6 +3,12 @@ import type { FullGameData } from '#shared/database'
 
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, 'id')
+  // Let's send an authorization error
+    throw createError({
+      statusCode: 401,
+      statusMessage: 'Unauthorized'
+    })
+    // Temporary
 
   if (!id || isNaN(Number(id))) {
     throw createError({

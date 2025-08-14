@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   const page = Number(query.page) || 1
   const limit = Number(query.limit) || 20
   const search = String(query.search || '')
-  const sortBy = String(query.sortBy || 'title')
+  const sortBy = String(query.sortBy || 'rank_position')
   const sortOrder = query.sortOrder === 'desc' ? 'desc' : 'asc'
 
   try {
@@ -32,6 +32,10 @@ export default defineEventHandler(async (event) => {
 
     // Apply sorting
     supabaseQuery = supabaseQuery.order(sortBy, { ascending: sortOrder === 'asc' })
+    // if sortBy is rank_position, ignore any rank_position === 0
+    if (sortBy === 'rank_position') {
+      supabaseQuery = supabaseQuery.filter('rank_position', 'gt', 0)
+    }
 
     // Apply pagination
     const from = (page - 1) * limit

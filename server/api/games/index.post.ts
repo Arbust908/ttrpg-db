@@ -4,6 +4,12 @@ import type { FullGameData } from '#shared/database'
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event)
+    // Let's send an authorization error
+    throw createError({
+      statusCode: 401,
+      statusMessage: 'Unauthorized'
+    })
+    // Temporary
 
     if (!body || !body.title) {
       throw createError({

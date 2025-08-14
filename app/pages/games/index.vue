@@ -102,7 +102,7 @@ import { debounce } from 'lodash-es'
 
 // State
 const search = ref('')
-const sortBy = ref('title')
+const sortBy = ref('rank_position')
 const sortOrder = ref<'asc' | 'desc'>('asc')
 const currentPage = ref(1)
 const pageSize = 20
