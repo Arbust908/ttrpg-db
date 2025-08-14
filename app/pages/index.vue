@@ -1,19 +1,17 @@
 <template>
   <div>
     <UPageHero
-      title="Nuxt UI Pro - Starter"
-      description="Nuxt UI Pro is a collection of premium components built on top of Nuxt UI to create beautiful & responsive applications in minutes."
+      title="TTRPG Database"
+      description="Manage and explore your tabletop role-playing game collection with powerful search, filtering, and organization tools."
       :links="[{
-        label: 'Get started',
-        to: 'https://ui.nuxt.com/getting-started/installation/pro/nuxt',
-        target: '_blank',
+        label: 'Browse Games',
+        to: '/games',
         trailingIcon: 'i-lucide-arrow-right',
         size: 'xl'
       }, {
-        label: 'Use this template',
-        to: 'https://github.com/nuxt-ui-pro/starter',
-        target: '_blank',
-        icon: 'i-simple-icons-github',
+        label: 'Dashboard',
+        to: '/dashboard',
+        icon: 'i-lucide-layout-dashboard',
         size: 'xl',
         color: 'neutral',
         variant: 'subtle'
@@ -22,39 +20,49 @@
 
     <UPageSection
       id="features"
-      title="The freedom to build anything"
-      description="Nuxt UI Pro ships with an extensive set of advanced components that cover a wide range of use-cases. Carefully crafted to reduce boilerplate code without sacrificing flexibility."
+      title="Complete TTRPG Management System"
+      description="Track your entire tabletop RPG collection with detailed information about mechanics, systems, families, and more."
       :features="[{
-        icon: 'i-lucide-wrench',
-        title: 'Fully customizable',
-        description: 'Customize any component through the App Config or fine-tune specific instances with the ui prop, just like Nuxt UI.'
+        icon: 'i-lucide-database',
+        title: 'Comprehensive Database',
+        description: 'Store detailed information about each game including ratings, rankings, publication year, and descriptions.'
       }, {
-        icon: 'i-lucide-square-stack',
-        title: 'Powerful slot system',
-        description: 'Take full control of component layouts and content with Vue\'s comprehensive slot system for maximum flexibility.'
+        icon: 'i-lucide-tags',
+        title: 'Rich Categorization',
+        description: 'Organize games by mechanics, systems, families, and honors with powerful relationship tracking.'
       }, {
-        icon: 'i-lucide-smartphone',
-        title: 'Mobile-first & responsive',
-        description: 'Built with a mobile-first approach, all components automatically adapt to any screen size while maintaining a polished look.'
+        icon: 'i-lucide-search',
+        title: 'Advanced Search & Filter',
+        description: 'Find exactly what you\'re looking for with powerful search and filtering capabilities across all attributes.'
+      }, {
+        icon: 'i-lucide-bar-chart',
+        title: 'Statistics & Insights',
+        description: 'View statistics about your collection including average ratings, total games, and category distributions.'
+      }, {
+        icon: 'i-lucide-star',
+        title: 'Ratings & Rankings',
+        description: 'Track both average ratings and geek ratings, plus ranking positions across different categories.'
+      }, {
+        icon: 'i-lucide-link',
+        title: 'External Links',
+        description: 'Connect to external resources like BoardGameGeek for additional information and community content.'
       }]"
     />
 
     <UPageSection>
       <UPageCTA
-        title="Start with Nuxt UI Pro today!"
-        description="Nuxt UI Pro is free in development, but you need a license to use it in production."
+        title="Start Managing Your Collection"
+        description="Begin organizing your TTRPG collection with our comprehensive database system."
         variant="subtle"
         :links="[{
-          label: 'Buy now',
-          to: 'https://ui.nuxt.com/pro/purchase',
-          target: '_blank',
-          icon: 'i-lucide-shopping-cart',
-          color: 'neutral'
+          label: 'View All Games',
+          to: '/games',
+          icon: 'i-lucide-library',
+          color: 'primary'
         }, {
-          label: 'License',
-          to: 'https://ui.nuxt.com/getting-started/license',
-          target: '_blank',
-          trailingIcon: 'i-lucide-circle-help',
+          label: 'Go to Dashboard',
+          to: '/dashboard',
+          trailingIcon: 'i-lucide-arrow-right',
           color: 'neutral',
           variant: 'subtle'
         }]"
