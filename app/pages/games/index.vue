@@ -56,12 +56,34 @@
 
     <!-- Games Table -->
     <div v-else-if="games && games.length > 0">
-      <!-- Simple table without custom templates to test -->
-      <UTable
-        :data="games"
-        :columns="simpleColumns"
-        class="w-full"
-      />
+      <div
+        v-for="game in games"
+        :key="game.id"
+        class="mb-4"
+      >
+        <UCard
+          :ui="{ body: 'flex items-center gap-4' }"
+        >
+          <div class="p-4 rounded-md bg-gray-800 relative">
+            <UBadge class="absolute -top-2 -left-2 aspect-square" :label="game.rank_position" />
+            <img
+              :src="game.image_url"
+              alt="Game Cover"
+              class="size-20 object-contain"
+              loading="lazy"
+            >
+          </div>
+          <div class="">
+            <h3 class="text-lg font-semibold">
+              {{ game.title }}
+            </h3>
+            <p class="text-gray-500">{{ game.subtitle }}</p>
+            <p class="text-gray-600 mt-2">
+              Rating: {{ game.rating_average }}
+            </p>
+          </div>
+        </UCard>
+      </div>
 
       <!-- Pagination -->
       <div class="mt-6 flex justify-center">
@@ -113,18 +135,9 @@ const { fetchGames } = useGames()
 // Sort options
 const sortOptions = [
   { label: 'Title', value: 'title' },
-  { label: 'Year', value: 'year' },
   { label: 'Rating', value: 'rating_average' },
   { label: 'Rank', value: 'rank_position' },
   { label: 'Recently Added', value: 'created_at' }
-]
-
-// Table columns - using accessorKey as per Nuxt UI documentation
-const simpleColumns = [
-  { accessorKey: 'title', header: 'Title' },
-  { accessorKey: 'year', header: 'Year' },
-  { accessorKey: 'rating_average', header: 'Rating' },
-  { accessorKey: 'rank_position', header: 'Rank' }
 ]
 
 // Fetch games

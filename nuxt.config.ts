@@ -25,6 +25,11 @@ export default defineNuxtConfig({
   supabase: {
     redirect: false,
     url: process.env.SUPABASE_URL,
-    key: process.env.SUPABASE_ANON_PUBLIC
+    key: process.env.SUPABASE_ANON_PUBLIC,
+    redirectOptions: {
+      login: '/login',
+      callback: '/dashboard',
+      exclude: ['/login', '/signup', '/reset-password', '/', '/about', '/help']
+    }
   }
 })

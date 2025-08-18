@@ -283,6 +283,11 @@
 <script setup lang="ts">
 import type { FullGameData } from '#shared/database'
 
+// Apply auth middleware to protect this page
+definePageMeta({
+  middleware: 'auth'
+})
+
 // Composables
 const supabase = useSupabaseClient()
 const { fetchGames } = useGames()

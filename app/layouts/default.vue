@@ -77,14 +77,50 @@
       </template>
 
       <template #right>
-        <UColorModeButton />
-        <UButton
-          icon="i-lucide-plus"
-          label="Browse Game"
-          color="primary"
-          to="/games/new"
-          class="hidden sm:flex"
-        />
+        <div class="flex items-center gap-3">
+          <UColorModeButton />
+
+          <!-- User Authentication Status -->
+          <div v-if="isAuthenticated" class="flex items-center gap-3">
+            <UDropdown :items="userMenuItems">
+              <UButton
+                color="neutral"
+                variant="ghost"
+                :label="userEmail"
+                trailing-icon="i-lucide-chevron-down"
+                class="hidden sm:flex"
+              />
+              <template #account="{ item }">
+                <div class="text-left">
+                  <p class="truncate font-medium text-gray-900 dark:text-white">
+                    {{ item.label }}
+                  </p>
+                  <p class="truncate text-xs text-gray-500 dark:text-gray-400">
+                    {{ item.description }}
+                  </p>
+                </div>
+              </template>
+            </UDropdown>
+
+            <UButton
+              icon="i-lucide-plus"
+              label="Add Game"
+              color="primary"
+              to="/games/new"
+              class="hidden sm:flex"
+            />
+          </div>
+
+          <!-- Login Button when not authenticated -->
+          <div v-else class="flex items-center gap-3">
+            <UButton
+              label="Sign In"
+              color="primary"
+              variant="soft"
+              to="/login"
+            />
+          </div>
+        </div>
       </template>
     </UHeader>
 
@@ -127,3 +163,39 @@
     <UToast />
   </div>
 </template>
+
+<script setup lang="ts">
+// Composables
+const { isAuthenticated, userEmail, signOut } = useAuth()
+const router = useRouter()
+
+// User menu items
+const userMenuItems = computed(() => [
+  [{
+    slot: 'account',
+    label: userEmail.value || 'User',
+    description: 'Signed in',
+    disabled: true
+  }],
+  [{
+    label: 'Dashboard',
+    icon: 'i-lucide-layout-dashboard',
+    click: () => router.push('/dashboard')
+  }, {
+    label: 'My Games',
+    icon: 'i-lucide-gamepad-2',
+    click: () => router.push('/games')
+  }],
+  [{
+    label: 'Settings',
+    icon: 'i-lucide-settings',
+    click: () => router.push('/settings'),
+    disabled: true
+  }],
+  [{
+    label: 'Sign Out',
+    icon: 'i-lucide-log-out',
+    click: async () => await signOut()
+  }]
+])
+</script>

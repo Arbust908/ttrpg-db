@@ -1,419 +1,293 @@
-# UI Components Documentation
+# UI Components
 
-## Overview
-The TTRPG Database uses Nuxt UI Pro components for a consistent, accessible, and modern user interface. This document outlines the UI components used throughout the application.
+## Nuxt UI Pro Components Reference
 
-## Component Library: Nuxt UI Pro
+This project uses Nuxt UI Pro, a premium component library built on top of Tailwind CSS. Below is the complete list of available components.
 
-### Core Components Used
-- **Layout Components**: UContainer, UPageHeader, UPageSection, UPageCTA
-- **Navigation**: UDashboardPanel, UDashboardNavbar, UButton
-- **Data Display**: UTable, UCard, UBadge, USkeleton
-- **Forms**: UInput, USelectMenu, UTextarea
-- **Feedback**: UAlert, UIcon
-- **Utility**: UPagination
+### Core Components
 
-## Page Layouts
+#### Layout Components
+- `UApp` - Main application wrapper
+- `UContainer` - Content container with responsive padding
+- `UMain` - Main content area (PRO)
+- `UHeader` - Page header component (PRO)
+- `UFooter` - Page footer component (PRO)
+- `UFooterColumns` - Multi-column footer layout (PRO)
+- `UPage` - Page wrapper component (PRO)
+- `UPageBody` - Page body container (PRO)
+- `UPageAside` - Page sidebar/aside content (PRO)
 
-### Default Layout
-**Location**: `app/layouts/default.vue`
+#### Navigation Components
+- `UBreadcrumb` - Breadcrumb navigation
+- `UNavigationMenu` - Navigation menu
+- `ULink` - Enhanced link component
+- `UContentNavigation` - Content-based navigation (PRO)
+- `UPageAnchors` - Page anchor navigation (PRO)
+- `UPageLinks` - Page link collection (PRO)
 
-**Structure:**
-```vue
-<template>
-  <div>
-    <!-- Navigation header -->
-    <!-- Main content slot -->
-    <slot />
-    <!-- Footer (if needed) -->
-  </div>
-</template>
-```
+#### Form Components
+- `UForm` - Form wrapper with validation
+- `UFormField` - Form field wrapper
+- `UInput` - Text input field
+- `UInputNumber` - Number input field
+- `UInputMenu` - Input with dropdown menu
+- `UInputTags` - Tag input field
+- `UTextarea` - Textarea field
+- `USelect` - Select dropdown
+- `USelectMenu` - Advanced select menu
+- `UCheckbox` - Checkbox input
+- `UCheckboxGroup` - Group of checkboxes
+- `URadioGroup` - Radio button group
+- `USwitch` - Toggle switch
+- `USlider` - Range slider
+- `UPinInput` - PIN code input
+- `UFileUpload` - File upload component
+- `UColorPicker` - Color picker
 
-## Page Components
+#### Display Components
+- `UCard` - Card container
+- `UAlert` - Alert message
+- `UBadge` - Badge/tag component
+- `UAvatar` - User avatar
+- `UAvatarGroup` - Group of avatars
+- `UIcon` - Icon component
+- `UKbd` - Keyboard key display
+- `UChip` - Chip/pill component
+- `USkeleton` - Loading skeleton
+- `UProgress` - Progress bar
+- `USeparator` - Visual separator
+- `UTimeline` - Timeline display
+- `UTree` - Tree view component
 
-### 1. Landing Page
-**Location**: `app/pages/index.vue`
+#### Interactive Components
+- `UButton` - Button component
+- `UButtonGroup` - Group of buttons
+- `UDropdownMenu` - Dropdown menu
+- `UContextMenu` - Context/right-click menu
+- `UCommandPalette` - Command palette/search
+- `UAccordion` - Accordion/collapsible panels
+- `UCollapsible` - Collapsible content
+- `UTabs` - Tab navigation
+- `UCarousel` - Image/content carousel
+- `UStepper` - Step-by-step process
 
-**Components Used:**
-- `UPageHero` - Hero section with title and CTAs
-- `UPageSection` - Feature sections
-- `UPageCTA` - Call-to-action section
+#### Overlay Components
+- `UModal` - Modal dialog
+- `UDrawer` - Drawer/slide-out panel
+- `USlideover` - Slide-over panel
+- `UPopover` - Popover/floating content
+- `UTooltip` - Tooltip on hover
+- `UToast` - Toast notifications
 
-**Key Features:**
-```vue
-<UPageHero
-  title="TTRPG Database"
-  description="Manage and explore your collection"
-  :links="[
-    { label: 'Browse Games', to: '/games' },
-    { label: 'Dashboard', to: '/dashboard' }
-  ]"
-/>
-```
-
-### 2. Dashboard
-**Location**: `app/pages/dashboard.vue`
-
-**Components Used:**
-- `UDashboardPanel` - Main dashboard wrapper
-- `UDashboardNavbar` - Dashboard navigation
-- `UCard` - Statistics cards
-- `UPageCard` - Quick action cards
-- `UIcon` - Icons for visual elements
-- `UBadge` - Rating badges
-
-**Statistics Cards Pattern:**
-```vue
-<UCard>
-  <div class="flex items-center justify-between">
-    <div>
-      <p class="text-sm text-gray-500 mb-1">Total Games</p>
-      <p class="text-2xl font-bold">{{ stats.totalGames }}</p>
-    </div>
-    <UIcon name="i-lucide-gamepad-2" class="w-8 h-8 text-primary" />
-  </div>
-</UCard>
-```
-
-**Quick Actions Pattern:**
-```vue
-<UPageCard
-  title="Browse Games"
-  description="View and search all games"
-  icon="i-lucide-library"
-  to="/games"
-/>
-```
-
-### 3. Games List
-**Location**: `app/pages/games/index.vue`
-
-**Components Used:**
-- `UContainer` - Page container
-- `UPageHeader` - Page title and description
-- `UInput` - Search input
-- `USelectMenu` - Sort dropdown
-- `UButton` - Sort order toggle
-- `UTable` - Games table
+#### Data Components
+- `UTable` - Data table
 - `UPagination` - Pagination controls
-- `USkeleton` - Loading states
-- `UAlert` - Error messages
+- `UCalendar` - Calendar component
 
-**Search Bar Pattern:**
-```vue
-<UInput
-  v-model="search"
-  placeholder="Search games..."
-  icon="i-lucide-search"
-  size="lg"
-  @input="debouncedSearch"
-/>
-```
+#### Dashboard Components (PRO)
+- `UDashboardPanel` - Dashboard panel wrapper
+- `UDashboardNavbar` - Dashboard navigation bar
+- `UDashboardSidebar` - Dashboard sidebar
+- `UDashboardSidebarCollapse` - Collapsible sidebar section
+- `UDashboardSidebarToggle` - Sidebar toggle button
+- `UDashboardToolbar` - Dashboard toolbar
+- `UDashboardGroup` - Dashboard content group
+- `UDashboardSearch` - Dashboard search
+- `UDashboardSearchButton` - Dashboard search button
+- `UDashboardResizeHandle` - Resizable panel handle
 
-**Table Configuration:**
-```vue
-<UTable
-  :data="games"
-  :columns="columns"
-  class="w-full"
-/>
-```
+#### Page Section Components (PRO)
+- `UPageHeader` - Page header section
+- `UPageHero` - Hero/banner section
+- `UPageSection` - Generic page section
+- `UPageFeature` - Feature showcase
+- `UPageCard` - Page card component
+- `UPageGrid` - Grid layout section
+- `UPageColumns` - Column layout section
+- `UPageCTA` - Call-to-action section
+- `UPageAccordion` - Page accordion section
+- `UPageList` - List section
+- `UPageLogos` - Logo showcase
+- `UPageMarquee` - Scrolling marquee
 
-**Pagination Pattern:**
-```vue
-<UPagination
-  v-model="currentPage"
-  :page-count="pageSize"
-  :total="totalGames"
-/>
-```
+#### Authentication Components (PRO)
+- `UAuthForm` - Authentication form
+- `UUser` - User profile display
 
-### 4. Game Detail
-**Location**: `app/pages/games/[id].vue`
+#### Content Components (PRO)
+- `UBlogPost` - Blog post display
+- `UBlogPosts` - Blog post list
+- `UChangelogVersion` - Changelog version entry
+- `UChangelogVersions` - Changelog version list
+- `UContentSearch` - Content search
+- `UContentSearchButton` - Content search button
+- `UContentSurround` - Content surrounding navigation
+- `UContentToc` - Table of contents
 
-**Components Used:**
-- `UContainer` - Page container
-- `UCard` - Content sections
-- `UBadge` - Category tags
-- `UButton` - Action buttons
-- `UIcon` - Icons
+#### Chat Components (PRO)
+- `UChatMessage` - Chat message display
+- `UChatMessages` - Chat message list
+- `UChatPalette` - Chat command palette
+- `UChatPrompt` - Chat input prompt
+- `UChatPromptSubmit` - Chat submit button
 
-**Info Card Pattern:**
-```vue
-<UCard>
-  <template #header>
-    <h2 class="text-xl font-semibold">Game Information</h2>
-  </template>
-  <!-- Content -->
-</UCard>
-```
+#### Utility Components (PRO)
+- `UColorModeButton` - Color mode toggle button
+- `UColorModeSelect` - Color mode dropdown
+- `UColorModeSwitch` - Color mode switch
+- `UColorModeAvatar` - Color mode avatar
+- `UColorModeImage` - Color mode responsive image
+- `ULocaleSelect` - Locale/language selector
+- `UBanner` - Site-wide banner
+- `UError` - Error page component
 
-### 5. Search Page
-**Location**: `app/pages/search.vue`
+#### Pricing Components (PRO)
+- `UPricingPlan` - Single pricing plan
+- `UPricingPlans` - Pricing plan comparison
+- `UPricingTable` - Pricing comparison table
 
-**Components Used:**
-- Advanced filter components (to be implemented)
-- Multi-select dropdowns
-- Range sliders
-- Checkbox groups
+## Component Usage in Project
+
+### Currently Used Components
+
+#### Authentication Pages
+- `UCard` - Login/signup form containers
+- `UForm`, `UFormGroup` - Form validation and structure
+- `UInput` - Email and password fields
+- `UButton` - Submit and action buttons
+- `UCheckbox` - Remember me and terms acceptance
+- `UModal` - Password reset and success dialogs
+- `UDivider` - Visual separators
+- `UIcon` - Icons throughout the UI
+- `UToast` - Success/error notifications
+
+#### Layout Components
+- `UHeader` - Main navigation header
+- `UMain` - Main content wrapper
+- `UFooter` - Site footer
+- `UContainer` - Content containers
+- `UColorModeButton` - Dark/light mode toggle
+- `UDropdown` - User menu and navigation dropdowns
+- `ULink` - Navigation links
+
+#### Dashboard Components
+- `UDashboardPanel` - Dashboard wrapper
+- `UDashboardNavbar` - Dashboard navigation
+- `UPageSection` - Dashboard sections
+- `UPageCard` - Quick action cards
+- `UBadge` - Status and rating badges
+
+#### Data Display
+- `UTable` - Games list table (needs fixing)
+- `UPagination` - Table pagination
+- `USkeleton` - Loading states (to be implemented)
+
+### Components to Implement
+
+#### Priority Components
+1. `USkeleton` - Loading states for data fetching
+2. `UContentSearch` - Advanced search functionality
+3. `UCommandPalette` - Quick navigation and actions
+4. `UBreadcrumb` - Navigation breadcrumbs
+
+#### Future Enhancements
+1. `UTimeline` - Game release timeline
+2. `UTree` - Hierarchical category display
+3. `UCarousel` - Game image galleries
+4. `UProgress` - Import/export progress
+5. `UTooltip` - Help text and hints
 
 ## Component Patterns
 
-### Loading States
+### Form Patterns
 ```vue
-<!-- Skeleton Loading -->
-<div v-if="pending" class="space-y-4">
-  <USkeleton v-for="i in 5" :key="i" class="h-24 w-full" />
-</div>
-```
-
-### Error Handling
-```vue
-<!-- Error Alert -->
-<UAlert
-  v-if="error"
-  color="error"
-  variant="subtle"
-  title="Error loading games"
-  :description="error.message"
-/>
-```
-
-### Empty States
-```vue
-<!-- Empty State Card -->
-<UCard v-if="!games.length" class="text-center py-12">
-  <UIcon name="i-lucide-database" class="w-12 h-12 text-gray-400 mx-auto mb-4" />
-  <h3 class="text-lg font-medium mb-2">No games found</h3>
-  <p class="text-gray-500 mb-4">Try adjusting your search</p>
-  <UButton label="Add First Game" icon="i-lucide-plus" to="/games/new" />
-</UCard>
-```
-
-## Icon System
-
-### Icon Library: Lucide Icons
-Icons are prefixed with `i-lucide-`
-
-**Common Icons Used:**
-- `i-lucide-search` - Search
-- `i-lucide-plus` - Add/Create
-- `i-lucide-edit` - Edit
-- `i-lucide-trash` - Delete
-- `i-lucide-star` - Rating
-- `i-lucide-gamepad-2` - Games
-- `i-lucide-settings` - Settings/Mechanics
-- `i-lucide-layers` - Systems
-- `i-lucide-users` - Families
-- `i-lucide-arrow-up/down` - Sorting
-- `i-lucide-arrow-right` - Navigation
-- `i-lucide-database` - Database/Empty
-- `i-lucide-image-off` - Missing image
-
-## Color System
-
-### Theme Colors
-- **Primary**: Blue (default Nuxt UI)
-- **Success**: Green
-- **Warning**: Yellow
-- **Error**: Red
-- **Neutral**: Gray
-
-### Usage Examples
-```vue
-<!-- Primary Button -->
-<UButton color="primary" label="Save" />
-
-<!-- Neutral Badge -->
-<UBadge color="neutral" variant="subtle">
-  {{ game.year }}
-</UBadge>
-
-<!-- Error Alert -->
-<UAlert color="error" variant="subtle" />
-```
-
-## Responsive Design
-
-### Breakpoints
-- `sm`: 640px
-- `md`: 768px
-- `lg`: 1024px
-- `xl`: 1280px
-- `2xl`: 1536px
-
-### Responsive Patterns
-```vue
-<!-- Responsive Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-  <!-- Cards -->
-</div>
-
-<!-- Responsive Flex -->
-<div class="flex flex-col sm:flex-row gap-4">
-  <!-- Elements -->
-</div>
-```
-
-## Form Components (To Be Implemented)
-
-### Game Form
-**Components Needed:**
-- Text inputs for title, subtitle
-- Textarea for description
-- Number inputs for year, ratings
-- File upload for images
-- Multi-select for categories
-- URL input for external links
-
-**Pattern:**
-```vue
-<UForm :schema="schema" :state="state" @submit="onSubmit">
-  <UFormGroup label="Title" name="title" required>
-    <UInput v-model="state.title" />
+<UForm :state="formState" :validate="validate" @submit="handleSubmit">
+  <UFormGroup label="Field Label" name="fieldName" required>
+    <UInput v-model="formState.fieldName" />
   </UFormGroup>
-  
-  <UFormGroup label="Description" name="description">
-    <UTextarea v-model="state.description" />
-  </UFormGroup>
-  
-  <UButton type="submit">Save Game</UButton>
 </UForm>
 ```
 
-## Custom Components Needed
-
-### 1. GameCard
-**Purpose**: Display game in card format
+### Card Patterns
 ```vue
-<template>
+<UCard>
+  <template #header>
+    <h3>Card Title</h3>
+  </template>
+  <!-- Card content -->
+  <template #footer>
+    <!-- Card actions -->
+  </template>
+</UCard>
+```
+
+### Modal Patterns
+```vue
+<UModal v-model="showModal">
   <UCard>
-    <img :src="game.thumbnail" :alt="game.title" />
-    <h3>{{ game.title }}</h3>
-    <p>{{ game.year }}</p>
-    <UBadge>{{ game.rating_average }}</UBadge>
+    <template #header>
+      <h3>Modal Title</h3>
+    </template>
+    <!-- Modal content -->
   </UCard>
-</template>
+</UModal>
 ```
 
-### 2. CategoryChip
-**Purpose**: Display category with remove option
+### Dashboard Layout Pattern
 ```vue
-<template>
-  <UBadge>
-    {{ category.name }}
-    <UButton icon="i-lucide-x" size="xs" @click="remove" />
-  </UBadge>
-</template>
+<UDashboardPanel>
+  <UDashboardNavbar title="Page Title">
+    <template #right>
+      <!-- Navbar actions -->
+    </template>
+  </UDashboardNavbar>
+  <UContainer>
+    <!-- Page content -->
+  </UContainer>
+</UDashboardPanel>
 ```
 
-### 3. RatingStars
-**Purpose**: Display star rating
-```vue
-<template>
-  <div class="flex">
-    <UIcon 
-      v-for="i in 5" 
-      :key="i"
-      name="i-lucide-star"
-      :class="i <= rating ? 'text-yellow-500' : 'text-gray-300'"
-    />
-  </div>
-</template>
-```
+## Styling Guidelines
 
-## Accessibility Considerations
+### Color Variants
+- `primary` - Primary brand color
+- `secondary` - Secondary color
+- `success` - Success states
+- `error` - Error states
+- `warning` - Warning states
+- `info` - Informational states
+- `neutral` - Neutral/gray states
 
-### ARIA Labels
-- All interactive elements have proper labels
-- Form inputs have associated labels
-- Icons have descriptive text or aria-labels
+### Size Variants
+- `xs` - Extra small
+- `sm` - Small
+- `md` - Medium (default)
+- `lg` - Large
+- `xl` - Extra large
 
-### Keyboard Navigation
-- All interactive elements are keyboard accessible
-- Tab order is logical
-- Focus states are visible
+### Common Props
+- `color` - Component color variant
+- `size` - Component size
+- `variant` - Component style variant (solid, soft, ghost, link)
+- `disabled` - Disable interaction
+- `loading` - Show loading state
+- `icon` - Icon to display
+- `block` - Full width display
 
-### Screen Reader Support
-- Semantic HTML structure
-- Proper heading hierarchy
-- Alternative text for images
-- Status messages announced
+## Best Practices
 
-## Performance Optimizations
+1. **Consistency**: Use the same component patterns throughout the application
+2. **Accessibility**: All interactive components include proper ARIA attributes
+3. **Responsive Design**: Components adapt to different screen sizes
+4. **Dark Mode**: All components support dark mode automatically
+5. **Form Validation**: Use UForm's built-in validation for all forms
+6. **Loading States**: Show appropriate loading indicators during async operations
+7. **Error Handling**: Display clear error messages using UAlert or UToast
+8. **Icons**: Use Lucide icons consistently (i-lucide-* prefix)
 
-### Lazy Loading
-- Images lazy loaded with native loading="lazy"
-- Routes lazy loaded by default in Nuxt
-- Components lazy loaded when needed
+## Component Documentation
 
-### Virtual Scrolling
-- Consider for large lists (future enhancement)
-- Use virtual list component for 100+ items
-
-### Debouncing
-- Search input debounced (300ms)
-- Form validation debounced
-- API calls throttled
-
-## Dark Mode Support
-
-Nuxt UI Pro provides automatic dark mode support:
-- Toggle in user preferences
-- System preference detection
-- Consistent color adaptation
-- Custom dark mode overrides possible
-
-## Component Testing Strategy
-
-### Unit Tests (Future)
-- Test component props
-- Test event emissions
-- Test computed properties
-- Test methods
-
-### Integration Tests (Future)
-- Test component interactions
-- Test form submissions
-- Test API integrations
-- Test navigation flows
-
-## Style Customization
-
-### Tailwind Configuration
-- Custom colors in `tailwind.config.js`
-- Custom spacing and sizing
-- Custom animations
-
-### Component Overrides
-```vue
-<!-- Override Nuxt UI component styles -->
-<UButton 
-  class="custom-button-class"
-  :ui="{ base: 'custom-base-styles' }"
-/>
-```
-
-## Known UI Issues
-
-### Current Problems
-1. **UTable not displaying data correctly**
-   - Need to verify column configuration
-   - May need custom cell templates
-
-2. **Missing form components**
-   - Need to implement game creation form
-   - Need validation schemas
-
-3. **No loading animations**
-   - Only using skeletons
-   - Need progress indicators
-
-### Planned Improvements
-1. Add transition animations
-2. Implement toast notifications
-3. Add confirmation dialogs
-4. Improve mobile responsiveness
-5. Add keyboard shortcuts
-6. Implement drag-and-drop
+For detailed component documentation and examples, refer to:
+- [Nuxt UI Documentation](https://ui.nuxt.com)
+- [Nuxt UI Pro Documentation](https://ui.nuxt.com/pro)
+- Component source code in `node_modules/@nuxt/ui-pro/components`
